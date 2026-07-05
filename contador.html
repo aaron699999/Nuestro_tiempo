@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
 <title>Nuestro tiempo juntos</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;700&family=DM+Mono:wght@500&family=Inter:wght@400;600&display=swap" rel="stylesheet">
@@ -182,7 +183,6 @@
     gap:clamp(0.6rem,3vw,2rem);
     justify-content:center;
     flex-wrap:wrap;
-    position:relative;
   }
 
   .unit{
@@ -219,23 +219,8 @@
     opacity:0.75;
   }
 
-  .digits.burst::before{
-    content:"";
-    position:absolute;
-    inset:-40px;
-    border-radius:50%;
-    background:radial-gradient(circle, rgba(255,255,255,0.5), transparent 70%);
-    animation:burstPulse 1.2s ease-out forwards;
-    z-index:-1;
-  }
-
-  @keyframes burstPulse{
-    0%{transform:scale(0.3); opacity:0.9;}
-    100%{transform:scale(2.4); opacity:0;}
-  }
-
   @media (prefers-reduced-motion: reduce){
-    .aurora, .heart, #counter-screen h1, .digits.burst::before{animation:none !important;}
+    .aurora, .heart, #counter-screen h1{animation:none !important;}
   }
 </style>
 </head>
@@ -251,20 +236,19 @@
 <div id="login-screen" class="card">
   <h1>&#191;Lista para empezar a contar?</h1>
   <p class="sub">Ingres&aacute; tu usuario y contrase&ntilde;a.</p>
-  <form id="login-form">
+  <div id="login-form">
     <label for="usuario">Usuario</label>
-    <input id="usuario" type="text" autocomplete="username" required>
+    <input id="usuario" type="text" autocomplete="username" placeholder="usuario">
     <label for="contrasena">Contrase&ntilde;a</label>
-    <input id="contrasena" type="password" autocomplete="current-password" required>
-    <button type="submit">Entrar</button>
+    <input id="contrasena" type="password" autocomplete="current-password" placeholder="contraseña">
+    <button id="btn-entrar">Entrar</button>
     <p class="error" id="error-msg" role="alert"></p>
-  </form>
-  <p class="error" id="config-warning" role="alert" style="margin-top:1rem;"></p>
+  </div>
 </div>
 
 <div id="counter-screen" class="hidden">
   <h1>Nuestro tiempo juntos</h1>
-  <div class="digits" id="digits">
+  <div class="digits">
     <div class="unit dias"><span class="value" id="v-dias">0</span><span class="label">D&iacute;as</span></div>
     <div class="unit horas"><span class="value" id="v-horas">00</span><span class="label">Horas</span></div>
     <div class="unit min"><span class="value" id="v-min">00</span><span class="label">Min</span></div>
@@ -273,120 +257,71 @@
   <p class="since" id="desde"></p>
 </div>
 
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js" crossorigin="anonymous"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js" crossorigin="anonymous"></script>
 <script>
-  // ============================================================
-  // 1) REEMPLAZA esto con la config de TU proyecto de Firebase
-  //    (la sacas de la consola de Firebase, ver gu&iacute;a SETUP.md)
-  // ============================================================
-  const firebaseConfig = {
-    apiKey: "AIzaSyDuTeUEJcpu24atg3H9oMd6O8stPD9k3lU",
-    authDomain: "ximenayaaron.firebaseapp.com",
-    projectId: "ximenayaaron",
-    storageBucket: "ximenayaaron.firebasestorage.app",
-    messagingSenderId: "979871713705",
-    appId: "1:979871713705:web:4a0ef95c385a3236dedcb8"
-  };
+  var USUARIO = "ximena0410";
+  var CONTRASENA = "migordito";
 
-  // ============================================================
-  // 2) REEMPLAZA esto con el usuario y contrase&ntilde;a que vos elijas
-  // ============================================================
-  const USUARIO = "ximena0410";
-  const CONTRASENA = "migordito";
+  // Fecha de inicio fija — 20 de junio de 2026 a las 22:11:06 (Bolivia UTC-4)
+  var FECHA_INICIO = new Date("2026-06-20T22:11:06-04:00");
 
-  let db, docRef;
-  let firebaseListo = false;
+  var loginScreen = document.getElementById("login-screen");
+  var counterScreen = document.getElementById("counter-screen");
+  var errorMsg = document.getElementById("error-msg");
+  var desdeEl = document.getElementById("desde");
 
-  try {
-    firebase.initializeApp(firebaseConfig);
-    db = firebase.firestore();
-    docRef = db.collection('contador').doc('relacion');
-    firebaseListo = true;
-  } catch (err) {
-    console.error('Error al inicializar Firebase:', err);
-  }
+  var vDias = document.getElementById("v-dias");
+  var vHoras = document.getElementById("v-horas");
+  var vMin = document.getElementById("v-min");
+  var vSeg = document.getElementById("v-seg");
 
-  const loginScreen = document.getElementById('login-screen');
-  const counterScreen = document.getElementById('counter-screen');
-  const errorMsg = document.getElementById('error-msg');
-  const configWarning = document.getElementById('config-warning');
-  const digitsBox = document.getElementById('digits');
-  const desdeEl = document.getElementById('desde');
-
-  if (!firebaseListo || firebaseConfig.apiKey === 'TU_API_KEY') {
-    configWarning.textContent = '⚠️ Falta terminar de configurar Firebase. Revisá SETUP.md y reemplazá firebaseConfig.';
-  }
-
-  const vDias = document.getElementById('v-dias');
-  const vHoras = document.getElementById('v-horas');
-  const vMin = document.getElementById('v-min');
-  const vSeg = document.getElementById('v-seg');
-
-  function pad(n){ return String(n).padStart(2,'0'); }
+  function pad(n){ return String(n).padStart(2, "0"); }
 
   function formatearFecha(fecha){
-    return fecha.toLocaleString('es-ES', {
-      day:'numeric', month:'long', year:'numeric', hour:'2-digit', minute:'2-digit'
+    return fecha.toLocaleString("es-ES", {
+      day:"numeric", month:"long", year:"numeric",
+      hour:"2-digit", minute:"2-digit"
     });
   }
 
-  function actualizarDigitos(inicio){
-    const diffMs = Date.now() - inicio.getTime();
-    const totalSeg = Math.max(0, Math.floor(diffMs/1000));
-    const dias = Math.floor(totalSeg/86400);
-    const horas = Math.floor((totalSeg%86400)/3600);
-    const min = Math.floor((totalSeg%3600)/60);
-    const seg = totalSeg%60;
-    vDias.textContent = dias;
+  function actualizarDigitos(){
+    var diffMs = Date.now() - FECHA_INICIO.getTime();
+    var totalSeg = Math.max(0, Math.floor(diffMs / 1000));
+    var dias  = Math.floor(totalSeg / 86400);
+    var horas = Math.floor((totalSeg % 86400) / 3600);
+    var min   = Math.floor((totalSeg % 3600) / 60);
+    var seg   = totalSeg % 60;
+    vDias.textContent  = dias;
     vHoras.textContent = pad(horas);
-    vMin.textContent = pad(min);
-    vSeg.textContent = pad(seg);
+    vMin.textContent   = pad(min);
+    vSeg.textContent   = pad(seg);
   }
 
-  function mostrarContador(inicio, esNuevo){
-    loginScreen.classList.add('hidden');
-    counterScreen.classList.remove('hidden');
-    if(esNuevo){ digitsBox.classList.add('burst'); }
-    desdeEl.textContent = 'Desde el ' + formatearFecha(inicio);
-    actualizarDigitos(inicio);
-    setInterval(() => actualizarDigitos(inicio), 1000);
+  function mostrarContador(){
+    loginScreen.classList.add("hidden");
+    counterScreen.classList.remove("hidden");
+    desdeEl.textContent = "Desde el " + formatearFecha(FECHA_INICIO);
+    actualizarDigitos();
+    setInterval(actualizarDigitos, 1000);
   }
 
-  document.getElementById('login-form').addEventListener('submit', async function(e){
-    e.preventDefault();
-    errorMsg.textContent = '';
-
-    if (!firebaseListo) {
-      errorMsg.textContent = 'Firebase no está configurado todavía. Revisá SETUP.md.';
-      return;
-    }
-
-    const usuario = document.getElementById('usuario').value.trim();
-    const contrasena = document.getElementById('contrasena').value;
+  document.getElementById("btn-entrar").addEventListener("click", function(){
+    errorMsg.textContent = "";
+    var usuario   = document.getElementById("usuario").value.trim();
+    var contrasena = document.getElementById("contrasena").value;
 
     if(usuario !== USUARIO || contrasena !== CONTRASENA){
-      errorMsg.textContent = 'Usuario o contraseña incorrectos.';
+      errorMsg.textContent = "Usuario o contrase\u00f1a incorrectos.";
       return;
     }
+    mostrarContador();
+  });
 
-    try{
-      const snap = await docRef.get();
-      let inicio;
-      let esNuevo = false;
-
-      if(snap.exists && snap.data().inicio){
-        inicio = snap.data().inicio.toDate();
-      } else {
-        inicio = new Date();
-        esNuevo = true;
-        await docRef.set({ inicio: firebase.firestore.Timestamp.fromDate(inicio) });
-      }
-
-      mostrarContador(inicio, esNuevo);
-    } catch(err){
-      errorMsg.textContent = 'No se pudo conectar. Revisá tu internet e intentá de nuevo.';
-    }
+  // Permitir Enter en los inputs
+  document.getElementById("contrasena").addEventListener("keydown", function(e){
+    if(e.key === "Enter"){ document.getElementById("btn-entrar").click(); }
+  });
+  document.getElementById("usuario").addEventListener("keydown", function(e){
+    if(e.key === "Enter"){ document.getElementById("contrasena").focus(); }
   });
 </script>
 
