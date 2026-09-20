@@ -3,13 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
-<meta name="robots" content="noindex,nofollow">
-<title>Nuestro Tiempo 💙</title>
+<title>Jugar 🎮</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Nunito:wght@400;600;700;800;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Fredoka:wght@500;700&family=DM+Mono:wght@500&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Nunito:wght@400;600;700;800;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-body{margin:0;min-height:100vh;background:#1A0B2E;color:#fff;font-family:'Inter',sans-serif;overflow-x:hidden;}
+body{margin:0;min-height:100vh;background:#04090f;color:#fff;font-family:'Nunito',sans-serif;overflow-x:hidden;}
 
 *{box-sizing:border-box;}
 body{
@@ -806,6 +805,7 @@ canvas#bg{position:fixed;inset:0;z-index:0;pointer-events:none}
 
 /* Ocultar canvas de regalito hasta que se use */
 #bg{display:none;}
+#bgSol{display:none;}
 
 /* ══ JARDÍN 2 MESES — v4 ══ */
 #jardinScreen{
@@ -941,335 +941,536 @@ canvas#bg{position:fixed;inset:0;z-index:0;pointer-events:none}
   max-width:300px;line-height:1.6;text-align:center;
 }
 
-
-/* ══ MENÚ PRINCIPAL (index.html) ══ */
-#pantEleccion{
-  position:fixed;inset:0;z-index:600;display:none;
-  flex-direction:column;align-items:center;justify-content:center;
-  padding:32px 24px;opacity:0;transition:opacity 0.7s ease;
-  overflow-y:auto;
+#btnVolverJuegos{
+  position:fixed;top:16px;left:16px;z-index:999;
+  font-family:'Nunito',sans-serif;font-weight:700;font-size:0.78rem;
+  letter-spacing:0.12em;color:rgba(220,240,255,0.75);
+  background:none;border:none;cursor:pointer;text-decoration:none;
 }
-.elec-titulo{
-  font-family:'Pacifico',cursive;font-size:clamp(1.4rem,5vw,2rem);
-  color:#fff;text-shadow:0 0 20px rgba(180,230,255,0.5);
-  margin-bottom:6px;text-align:center;
-}
-.elec-sub{
-  font-family:'Cormorant Garamond',serif;font-style:italic;
-  font-size:0.92rem;color:rgba(220,240,255,0.75);margin-bottom:28px;
-}
-.elec-cards{display:flex;flex-direction:column;gap:14px;width:100%;max-width:320px;padding-bottom:20px;}
-.elec-card{
-  cursor:pointer;border-radius:20px;padding:20px 20px;
-  text-align:center;transition:transform 0.2s;
-  text-decoration:none;display:block;
-}
-.elec-card:active{transform:scale(0.96)}
-.elec-star{background:rgba(180,230,255,0.07);border:1.5px solid rgba(180,230,255,0.25);}
-.elec-sol{background:rgba(245,200,70,0.07);border:1.5px solid rgba(245,200,70,0.3);}
-.elec-jardin{background:rgba(255,120,180,0.07);border:1.5px solid rgba(255,140,190,0.28);}
-.elec-poemas{background:rgba(200,150,255,0.07);border:1.5px solid rgba(200,150,255,0.28);}
-.elec-icon{font-size:2rem;margin-bottom:6px}
-.elec-n-star{font-family:'Nunito',sans-serif;font-weight:800;font-size:0.98rem;color:#fff;letter-spacing:0.08em;}
-.elec-n-sol{font-family:'Nunito',sans-serif;font-weight:800;font-size:0.98rem;color:#ffd84d;letter-spacing:0.08em;text-shadow:0 0 12px rgba(255,210,50,0.5);}
-.elec-n-jardin{font-family:'Nunito',sans-serif;font-weight:800;font-size:0.98rem;color:#ff9dc4;letter-spacing:0.08em;text-shadow:0 0 12px rgba(255,140,190,0.5);}
-.elec-n-poemas{font-family:'Nunito',sans-serif;font-weight:800;font-size:0.98rem;color:#d4a5ff;letter-spacing:0.08em;text-shadow:0 0 12px rgba(200,150,255,0.5);}
-.elec-d-star{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:0.82rem;color:rgba(210,235,255,0.65);margin-top:4px;}
-.elec-d-sol{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:0.82rem;color:rgba(245,210,80,0.65);margin-top:4px;}
-.elec-d-jardin{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:0.82rem;color:rgba(255,180,210,0.65);margin-top:4px;}
-.elec-d-poemas{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:0.82rem;color:rgba(210,180,255,0.65);margin-top:4px;}
-
 </style>
 </head>
 <body>
-<div class="aurora"></div>
-<span class="heart-float" style="left:8%;animation-duration:14s;animation-delay:0s;">&#10084;</span>
-<span class="heart-float" style="left:25%;animation-duration:18s;animation-delay:3s;">&#10084;</span>
-<span class="heart-float" style="left:50%;animation-duration:16s;animation-delay:1s;">&#10084;</span>
-<span class="heart-float" style="left:70%;animation-duration:20s;animation-delay:5s;">&#10084;</span>
-<span class="heart-float" style="left:88%;animation-duration:15s;animation-delay:2s;">&#10084;</span>
-
 <canvas id="bg"></canvas>
+<a id="btnVolverJuegos" href="index.html">← Menú</a>
 
-<div id="loginScreen">
-  <div class="login-card">
-    <h1>&#191;Lista para empezar a contar?</h1>
-    <p class="sub">Ingres&aacute; tu usuario y contrase&ntilde;a.</p>
-    <label for="inputUsuario">Usuario</label>
-    <input id="inputUsuario" type="text" autocomplete="username" placeholder="usuario">
-    <label for="inputPass">Contrase&ntilde;a</label>
-    <input id="inputPass" type="password" autocomplete="current-password" placeholder="contrase&ntilde;a">
-    <button id="btnEntrar">Entrar</button>
-    <p class="login-error" id="loginError" role="alert"></p>
+<!-- CARTA SECRETA -->
+<div id="cartaSecreta">
+  <div class="cs-header">
+    <button class="cs-back" id="csBack">← volver al juego</button>
   </div>
-</div>
+  <div class="cs-inner">
+    <div class="cs-estrella">🌟</div>
+    <div class="cs-titulo">¡Llegaste a 50 puntos!<br>Esto merece una carta especial 💙</div>
+    <div class="cs-carta">
+      <div class="cs-texto">Quiero que sepas que cada vez que pienso en vos no me puedo sentir más feliz que una lombriz.
 
-<!-- CONTADOR -->
-<div id="contadorScreen">
-  <h1>Nuestro tiempo juntos</h1>
-  <div class="digits">
-    <div class="unit dias"><span class="value" id="vDias">0</span><span class="label">D&iacute;as</span></div>
-    <div class="unit horas"><span class="value" id="vHoras">00</span><span class="label">Horas</span></div>
-    <div class="unit min"><span class="value" id="vMin">00</span><span class="label">Min</span></div>
-    <div class="unit seg"><span class="value" id="vSeg">00</span><span class="label">Seg</span></div>
-  </div>
-  <p class="desde-txt" id="desdeEl"></p>
-  <div class="cancion-wrap">
-    <p class="dedicatoria">
-      Esta canci&oacute;n me recuerda a ti,<br>
-      porque as&iacute; como dice esta canci&oacute;n,<br>
-      llegaste y le diste luz<br>
-      a mis d&iacute;as grises.&nbsp;&#9825;<br><br>
-      <span class="gracias">Gracias por existir.</span>
-    </p>
-    <iframe
-      src="https://open.spotify.com/embed/track/7oTeTdhsppTQ4uk11cdDwe?utm_source=generator&theme=0"
-      width="100%" height="152" frameborder="0"
-      allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-      style="border-radius:14px;margin-top:0.5rem;min-height:152px;display:block;">
-    </iframe>
-  </div>
-  <button class="btn-regalito" id="btnRegalito">Ver tu regalito ✨</button>
-</div>
+Conocerte se ha vuelto en un regalo de cumpleaños que nunca olvidaré por lo importante que te has vuelto día a día, desvelada tras desvelada, semana a semana y meses.
 
-<div id="apertura" style="position:fixed;inset:0;z-index:1000;display:none;align-items:center;justify-content:center;overflow:hidden;">
-  <div id="papel" style="position:absolute;inset:0;background:linear-gradient(160deg,#f5f0e8,#ede5d0);display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden;">
-    <div id="fraseUnica"></div>
-    <div class="carta-centro">
-      <div class="carta-para">para</div>
-      <div class="carta-nombre">Ximena 💙</div>
-      <div class="lacre" id="lacre">💌</div>
-      <div class="lacre-hint">toca el sello para abrir</div>
+Increíble sentir tantas cosas — como que el quererte mucho haya evolucionado tan rápido que todos los días siento que crece. Hablar con vos se volvió mi mejor momento del día, y cuando no lo hago me siento tan raro, como si le cortaran la mamadera a un bebé que quiere chillar.
+
+Cada día que te conozco más, no puedo parar de pensar en lo increíble, inteligente, ingeniosa y brillante que sos. Inevitablemente no puedo dejar de sentirme pequeño a tu lado — y no me desagrada. Me gusta, porque sos tan impresionante que me encanta.</div>
+      <div class="cs-firma">Atte: El Aguelo</div>
+      <div class="cs-amor">Te Quiero Mucho Muchísimo ❤️</div>
     </div>
   </div>
 </div>
+<!-- CAJITA -->
+<div id="cajitaBtn">
+  <div id="cajitaEmoji">🎁</div>
+  <div id="cajitaLabel">¡Sorpresa!</div>
+</div>
 
-<div id="dedicatoria">
-  <div class="ded-sub">te dedico</div>
-  <div class="ded-titulo">Te Quiero</div>
-  <div class="ded-artista">— Hombres G</div>
-  <div class="ded-letra">
-    <div class="ded-linea" style="animation-delay:0.8s">"Te quiero, te quiero,</div>
-    <div class="ded-linea" style="animation-delay:1.1s">y no sé si tú a mí</div>
-    <div class="ded-linea" style="animation-delay:1.4s">pero yo sin ti</div>
-    <div class="ded-linea" style="animation-delay:1.7s">no sé vivir"</div>
+<div id="app" style="display:block">
+
+  <div class="header">
+    <div class="header-sub">Hecho con Cariño para</div>
+    <div class="header-title">Ximena ✨</div>
+    <div class="score-bar">⭐ puntos: <span class="score-val" id="totalScore">0</span></div>
   </div>
-  <div class="ded-mensaje">Esta canción me hace pensar en vos cada vez que la escucho. Ojalá cuando la oigas, sepas que es para ti.</div>
-  <div class="ded-from">— Aaron 💙</div>
-  <a class="spotify-btn" href="https://open.spotify.com/track/6tu2FHuKL9C8pwNrityweQ" target="_blank">
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
-    Te Quiero — Hombres G
-  </a>
-  <div style="width:100%;max-width:340px;background:rgba(180,230,255,0.04);border:1px solid rgba(180,230,255,0.12);border-radius:20px;padding:20px 18px;margin-top:16px;">
-    <div style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:0.78rem;color:rgba(180,230,255,0.4);letter-spacing:0.2em;text-transform:uppercase;text-align:center;margin-bottom:10px;">y también</div>
-    <div style="font-family:'Pacifico',cursive;font-size:clamp(1.1rem,4vw,1.5rem);background:linear-gradient(135deg,#ffffff,#b8e8ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-align:center;margin-bottom:3px;">You Rock My World</div>
-    <div style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:0.9rem;color:rgba(180,230,255,0.45);text-align:center;margin-bottom:14px;">— Michael Jackson</div>
-    <div style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(0.9rem,3vw,1.05rem);color:rgba(220,245,255,0.85);text-align:center;line-height:1.75;margin-bottom:14px;">
-      <div style="opacity:0;animation:fadeUp 0.5s ease 0.3s both">"My life will never be the same</div>
-      <div style="opacity:0;animation:fadeUp 0.5s ease 0.6s both">'Cause girl you came and changed</div>
-      <div style="opacity:0;animation:fadeUp 0.5s ease 0.9s both">the way I walk, the way I talk"</div>
+
+  <!-- JUEGO 1 -->
+  <div class="section" style="animation-delay:0.08s">
+    <div class="section-title">🧠 Memoria</div>
+    <div class="section-sub">encontrá los 6 pares</div>
+    <div id="memGrid"></div>
+    <div class="mem-status" id="memStatus">Dale la vuelta a las cartas 🃏</div>
+    <button class="mem-btn" id="memReset">🔀 Mezclar de nuevo</button>
+  </div>
+
+  <!-- JUEGO 2 -->
+  <div class="section" style="animation-delay:0.16s">
+    <div class="section-title">💭 Adivina la Palabra</div>
+    <div class="section-sub">pistas sobre nosotros • 6 vidas</div>
+    <div class="word-counter" id="wordCounter"></div>
+    <div class="word-pista" id="wordPista"></div>
+    <div class="word-blanks" id="wordBlanks"></div>
+    <div class="word-vidas" id="wordVidas" style="display:none"></div>
+    <div class="word-keyboard" id="wordKeyboard"></div>
+    <div class="word-msg" id="wordMsg"></div>
+    <div style="display:flex;gap:8px">
+      <button class="word-next" id="wordNext" style="flex:1">Siguiente →</button>
+      <button class="word-skip" id="wordSkip">Saltar ⏭</button>
     </div>
-    <div style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:0.88rem;color:rgba(180,210,255,0.5);text-align:center;line-height:1.6;margin-bottom:14px;">Desde que llegaste todo cambió — hasta yo cambié. No puedo explicarlo, pero vos lo sabés.</div>
-    <div style="font-size:0.72rem;letter-spacing:0.2em;color:rgba(140,200,255,0.3);text-transform:uppercase;text-align:center;margin-bottom:14px;">— Aaron 💙</div>
-    <a class="spotify-btn" href="https://open.spotify.com/track/4oY2T9ur7Ll5b2kpBlcWcb" target="_blank" style="background:#158a3e;width:100%;justify-content:center;">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
-      Escuchar en Spotify
-    </a>
+    <div class="word-done-msg" id="wordDoneMsg"></div>
   </div>
-  <button class="ded-skip" id="dedSkip">continuar al regalito →</button>
+
+  <!-- JUEGO 3 -->
+  <div class="section" style="animation-delay:0.24s">
+    <div class="section-title">💌 ¿Cómo estás hoy?</div>
+    <div class="section-sub">para ximena, con entusiasmo</div>
+    <div class="aff-intro">Contame cómo te sentís y te mando algo lindo 🥺</div>
+    <div class="aff-progress" id="affProgress"></div>
+    <div class="aff-question" id="affQ"></div>
+    <div class="aff-opts"     id="affOpts"></div>
+    <div class="aff-card"     id="affCard">
+      <span class="aff-emoji" id="affEmoji"></span>
+      <div  class="aff-text"  id="affText"></div>
+      <div  class="aff-from">— Aaron</div>
+    </div>
+    <button class="aff-next"    id="affNext">Siguiente 💫</button>
+    <button class="aff-restart" id="affRestart">↺ Volver a empezar</button>
+  </div>
+
 </div>
 
-<!-- MENÚ PRINCIPAL -->
-<div id="pantEleccion">
-  <div style="font-size:2rem;margin-bottom:12px;animation:floatY 3s ease-in-out infinite">💙</div>
-  <div class="elec-titulo">¿Qué querés hacer?</div>
-  <div class="elec-sub">Elegí un camino</div>
-  <div class="elec-cards">
-    <a class="elec-card elec-star" href="juegos.html">
-      <div class="elec-icon">🎮</div>
-      <div class="elec-n-star">Jugar</div>
-      <div class="elec-d-star">Memoria, palabras y más</div>
-    </a>
-    <a class="elec-card elec-sol" href="sol.html">
-      <div class="elec-icon">☀️</div>
-      <div class="elec-n-sol">Algo más para vos</div>
-      <div class="elec-d-sol">Un regalito especial 💙</div>
-    </a>
-    <a class="elec-card elec-jardin" href="jardin.html">
-      <div class="elec-icon">🌷</div>
-      <div class="elec-n-jardin">Nuestro Jardín</div>
-      <div class="elec-d-jardin">2 meses juntos 🌸</div>
-    </a>
-    <a class="elec-card elec-poemas" href="poemas.html">
-      <div class="elec-icon">💌</div>
-      <div class="elec-n-poemas">Nuestros Poemas</div>
-      <div class="elec-d-poemas">Cartas escritas para vos</div>
-    </a>
-  </div>
-</div>
+<div class="toast" id="toast"></div>
 
 <script>
-/* ══ CONTADOR ══ */
-var USUARIO   = 'ximena0410';
-var CONTRASENA = 'migordito';
-var FECHA_INICIO = new Date('2026-06-20T22:11:06-04:00');
+/* ══ JUEGOS (R2 script 1) ══ */
 
-var loginScreen   = document.getElementById('loginScreen');
-var contadorScreen = document.getElementById('contadorScreen');
-var errorMsg      = document.getElementById('loginError');
-var desdeEl       = document.getElementById('desdeEl');
-var vDias  = document.getElementById('vDias');
-var vHoras = document.getElementById('vHoras');
-var vMin   = document.getElementById('vMin');
-var vSeg   = document.getElementById('vSeg');
+/* ══════════════════════════════════════════════════
+   ★ DATOS EDITABLES ★
 
-function padN(n){ return String(n).padStart(2,'0'); }
+   Aquí están todos los contenidos del juego.
+   Podés agregar, quitar o editar sin tocar nada más.
+══════════════════════════════════════════════════ */
 
-function formatearFecha(f){
-  return f.toLocaleString('es-ES',{
-    day:'numeric',month:'long',year:'numeric',
-    hour:'2-digit',minute:'2-digit'
+// ── JUEGO 1: pares de memoria ──────────────────
+// Máx recomendado: 8 pares
+const MEM_PAIRS = [
+  { emoji:'🌙', label:'luna'    },
+  { emoji:'🚀', label:'cohete'  },
+  { emoji:'💕', label:'amor'    },
+  { emoji:'🍩', label:'dona'    },
+  { emoji:'🌸', label:'flor'    },
+  { emoji:'🎵', label:'musica'  },
+];
+
+// ── JUEGO 2: palabras a adivinar ───────────────
+// word: en MAYÚSCULAS sin tildes
+// Agregá más objetos cuando quieras
+const PALABRAS = [
+  {word:"LUNA",pista:"Cuando disociamos juntos… ¿a qué lugar soñamos escaparnos? 🌙"},
+  {word:"SONROJADOS",pista:"Nosotros siempre estamos así cuando estamos juntos 😊"},
+  {word:"REGUETON",pista:"¿Qué género musical siempre termina sonando cuando estamos juntos? 🎵"},
+  {word:"XIMENA",pista:"Entre nosotros sabemos quién manda y es… 👑"},
+  {word:"NERVIOSO",pista:"¿Cuando te veo yo me pongo muy...? 🫣"}
+];
+
+// ── JUEGO 3: preguntas y cartas ────────────────
+// Cada objeto tiene:
+//   pregunta: lo que se muestra arriba
+//   opciones: array de { texto, emoji, carta } por cada opción
+// Agregá más preguntas cuando quieras
+const AFIRMACIONES = [
+  {
+    pregunta: '¿Cómo te sentís ahora?',
+    opciones: [
+  {texto:"😤 Agotada",emoji:"🤗",carta:"Te mando un fuerte abrazo. Vos podés hacer toooodo lo que te imaginás y más — solo es un esfuercito más. Sabés que para todo lo que implique ayudarte, voy a estar acá."},
+  {texto:"😴 Con sueño",emoji:"🌙",carta:"Pobretita mi niña, yo sé que es difícil avanzar así… pero para despertarte quiero decirte algo: Te Quiero Muchísimo y sos mi regalo más especial."},
+  {texto:"😰 Estresada",emoji:"🌬️",carta:"Quiero saber qué te puso así para desquitármelas. Respirar hondo y volver a pensar ayudará a despejar esa mente tan brillante que tenés — que me fascina."},
+  {texto:"🥺 Senisble",emoji:"💙",carta:"aaaww mi niña, yo sé que las emociones a veces están a flor de piel. Sos muy importante, valiosa y radiante para mí. Te quiero muuuuuuuuuuuuuu🐄chísimo."},
+  {texto:"🥰 Feliz",emoji:"🌻",carta:"Así deberías estar siempre — brillante como un girasol. Porque no hay cosa más bonita después del amanecer que vos."},
+  {texto:"😤 Bava",emoji:"🔥",carta:"Ahí está mi Bava 🔥 Ya sé que algo hice… pero igual te quiero mucho aunque estés así de tierna cuando te enojas."},
+  {texto:"😤 Bava",emoji:"🔥",carta:"Ahí está mi Bava 🔥 Ya sé que algo hice… pero igual te quiero mucho aunque estés así de tierna cuando te enojas."}
+]
+  }
+];
+
+/* ══════════════════════════════════════════════════
+   CANVAS FONDO
+══════════════════════════════════════════════════ */
+const bg=document.getElementById('bg');
+const bx=bg.getContext('2d');
+function resz(){bg.width=innerWidth;bg.height=innerHeight}
+resz();window.addEventListener('resize',resz);
+
+const STARS=Array.from({length:220},()=>({
+  x:Math.random(),y:Math.random(),
+  r:Math.random()*1.5+0.15,
+  a:Math.random()*0.6+0.25,
+  sp:0.002+Math.random()*0.007,
+  ph:Math.random()*Math.PI*2,
+  // mezcla de blancos y celestes
+  hue:Math.random()>0.5 ? 195+Math.random()*25 : 0
+}));
+
+(function draw(t){
+  bx.clearRect(0,0,bg.width,bg.height);
+  const g=bx.createRadialGradient(bg.width/2,bg.height/2,0,bg.width/2,bg.height/2,bg.width*0.9);
+  g.addColorStop(0,'#060d18');g.addColorStop(1,'#02060e');
+  bx.fillStyle=g;bx.fillRect(0,0,bg.width,bg.height);
+  STARS.forEach(s=>{
+    const a=s.a*(0.4+0.6*Math.sin(t*0.001*s.sp*400+s.ph));
+    bx.beginPath();bx.arc(s.x*bg.width,s.y*bg.height,s.r,0,Math.PI*2);
+    bx.fillStyle=s.hue
+      ? `hsla(${s.hue},70%,85%,${a})`
+      : `rgba(245,250,255,${a})`;
+    bx.fill();
   });
+  requestAnimationFrame(draw);
+})(0);
+
+/* ══════════════════════════════════════════════════
+   FX HELPERS
+══════════════════════════════════════════════════ */
+let totalScore=0;
+function addScore(n){
+  totalScore+=n;
+  document.getElementById('totalScore').textContent=totalScore;
 }
 
-function actualizarDigitos(){
-  var diffMs   = Date.now() - FECHA_INICIO.getTime();
-  var total    = Math.max(0, Math.floor(diffMs/1000));
-  vDias.textContent  = Math.floor(total/86400);
-  vHoras.textContent = padN(Math.floor((total%86400)/3600));
-  vMin.textContent   = padN(Math.floor((total%3600)/60));
-  vSeg.textContent   = total%60;
+function spawnSparks(x,y,count,hueA,hueB){
+  for(let i=0;i<count;i++){
+    const sp=document.createElement('div');sp.className='spark';
+    const ang=Math.random()*Math.PI*2,dist=45+Math.random()*110,size=3+Math.random()*8;
+    sp.style.cssText=`left:${x}px;top:${y}px;width:${size}px;height:${size}px;
+      background:hsl(${hueA+Math.random()*(hueB-hueA)},85%,72%);
+      --tx:${Math.cos(ang)*dist}px;--ty:${Math.sin(ang)*dist}px;
+      animation-duration:${0.4+Math.random()*0.55}s;`;
+    document.body.appendChild(sp);setTimeout(()=>sp.remove(),1000);
+  }
 }
 
-function mostrarContador(){
-  loginScreen.classList.add('out');
-  setTimeout(function(){
-    loginScreen.style.display='none';
-    contadorScreen.classList.add('visible');
-    desdeEl.textContent = 'Desde el ' + formatearFecha(FECHA_INICIO);
-    actualizarDigitos();
-    setInterval(actualizarDigitos,1000);
-  },650);
+const CONF=['💙','🌸','✨','⭐','🤍','💎','🌀'];
+function spawnConfetti(n){
+  for(let i=0;i<n;i++){
+    const c=document.createElement('div');c.className='confetti-p';
+    c.textContent=CONF[Math.floor(Math.random()*CONF.length)];
+    const dur=2+Math.random()*2.5;
+    c.style.cssText=`left:${Math.random()*100}%;top:-30px;
+      font-size:${0.9+Math.random()*0.9}rem;
+      --rot:${(Math.random()-0.5)*580}deg;
+      animation-duration:${dur}s;animation-delay:${Math.random()*0.6}s;`;
+    document.body.appendChild(c);setTimeout(()=>c.remove(),(dur+1)*1000);
+  }
 }
 
-document.getElementById('btnEntrar').addEventListener('click',function(){
-  errorMsg.textContent='';
-  var u = document.getElementById('inputUsuario').value.trim();
-  var p = document.getElementById('inputPass').value;
-  if(u!==USUARIO || p!==CONTRASENA){
-    errorMsg.textContent='Usuario o contrase\u00f1a incorrectos.';
+let toastTimer;
+function showToast(msg){
+  const t=document.getElementById('toast');
+  t.innerHTML=msg;t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer=setTimeout(()=>t.classList.remove('show'),3400);
+}
+
+/* ══════════════════════════════════════════════════
+   JUEGO 1 — MEMORIA
+══════════════════════════════════════════════════ */
+let memFlipped=[],memMatched=0,memLocked=false,memMoves=0,memCards=[];
+
+function buildMemory(){
+  memFlipped=[];memMatched=0;memLocked=false;memMoves=0;
+  const items=[...MEM_PAIRS,...MEM_PAIRS]
+    .map((v,i)=>({...v,uid:i}))
+    .sort(()=>Math.random()-0.5);
+  memCards=items;
+  const grid=document.getElementById('memGrid');
+  grid.innerHTML='';
+  items.forEach((item,idx)=>{
+    const card=document.createElement('div');
+    card.className='mem-card';card.dataset.idx=idx;
+    card.innerHTML=`<div class="mem-front">✦</div><div class="mem-back">${item.emoji}</div>`;
+    card.addEventListener('click',()=>flipCard(card,idx));
+    grid.appendChild(card);
+  });
+  document.getElementById('memStatus').textContent='Dale la vuelta a las cartas 🃏';
+}
+
+function flipCard(card,idx){
+  if(memLocked||card.classList.contains('flipped')||card.classList.contains('matched'))return;
+  card.classList.add('flipped');
+  memFlipped.push(idx);
+  if(memFlipped.length===2){
+    memLocked=true;memMoves++;
+    const [a,b]=memFlipped;
+    const ca=document.querySelector(`[data-idx="${a}"]`);
+    const cb=document.querySelector(`[data-idx="${b}"]`);
+    if(memCards[a].label===memCards[b].label){
+      setTimeout(()=>{
+        ca.classList.add('matched');cb.classList.add('matched');
+        memMatched++;memFlipped=[];memLocked=false;
+        const r=ca.getBoundingClientRect();
+        spawnSparks(r.left+r.width/2,r.top+r.height/2,10,185,220);
+        if(memMatched===MEM_PAIRS.length){
+          const bonus = memMoves < 8 ? 35 : memMoves < 12 ? 25 : 15;
+          addScore(bonus);spawnConfetti(14);
+          document.getElementById('memStatus').textContent=`¡Ganaste en ${memMoves} jugadas! +${bonus}⭐`;
+          showToast(`🧠 ¡Ximena la rompió! +${bonus} puntos 💙`);
+        } else {
+          document.getElementById('memStatus').textContent=`Par encontrado! ${memMatched}/${MEM_PAIRS.length} ✓`;
+        }
+      },380);
+    } else {
+      setTimeout(()=>{
+        ca.classList.remove('flipped');cb.classList.remove('flipped');
+        memFlipped=[];memLocked=false;
+      },900);
+    }
+  }
+}
+document.getElementById('memReset').addEventListener('click',buildMemory);
+buildMemory();
+
+/* ══════════════════════════════════════════════════
+   JUEGO 2 — ADIVINA LA PALABRA
+══════════════════════════════════════════════════ */
+let wIdx=0,wCurrent,wGuessed,wVidas,wDone=false;
+
+function buildWord(){
+  if(wIdx>=PALABRAS.length){
+    document.getElementById('wordPista').style.display='none';
+    document.getElementById('wordBlanks').style.display='none';
+    document.getElementById('wordVidas').style.display='none';
+    document.getElementById('wordKeyboard').style.display='none';
+    document.getElementById('wordNext').style.display='none';
+  document.getElementById('wordSkip').style.display='block';
+  document.getElementById('wordSkip').style.display='block';
+    document.getElementById('wordCounter').style.display='none';
+    const dm=document.getElementById('wordDoneMsg');
+    dm.style.display='block';
+    dm.innerHTML='¡Completaste todas las palabras! 🎉<br><span style="font-size:0.85rem;color:rgba(180,230,255,0.5);font-family:Nunito,sans-serif">Puntaje total: '+totalScore+' ⭐</span>';
+    spawnConfetti(20);
     return;
   }
-  mostrarContador();
+  wDone=false;wCurrent=PALABRAS[wIdx];wGuessed=new Set();wVidas=6;
+  document.getElementById('wordCounter').textContent=`palabra ${wIdx+1} de ${PALABRAS.length}`;
+  document.getElementById('wordPista').textContent=wCurrent.pista;
+  document.getElementById('wordMsg').textContent='';
+  document.getElementById('wordMsg').style.color='';
+  document.getElementById('wordNext').style.display='none';
+  document.getElementById('wordSkip').style.display='block';
+  document.getElementById('wordSkip').style.display='block';
+  renderBlanks();renderKeyboard();renderVidas();
+}
+
+function renderBlanks(){
+  const cont=document.getElementById('wordBlanks');cont.innerHTML='';
+  wCurrent.word.split('').forEach(l=>{
+    const box=document.createElement('div');
+    box.className='letter-box';
+    box.textContent=wGuessed.has(l)?l:'';
+    cont.appendChild(box);
+  });
+}
+function renderVidas(){
+  document.getElementById('wordVidas').textContent='— '.repeat(wVidas)+'· '.repeat(6-wVidas);
+}
+function renderKeyboard(){
+  const kb=document.getElementById('wordKeyboard');kb.innerHTML='';
+  'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('').forEach(l=>{
+    const btn=document.createElement('button');btn.className='key-btn';
+    btn.textContent=l;
+    if(wGuessed.has(l)||wDone)btn.disabled=true;
+    btn.addEventListener('click',()=>guessLetter(l));
+    kb.appendChild(btn);
+  });
+}
+
+function guessLetter(l){
+  if(wDone||wGuessed.has(l))return;
+  wGuessed.add(l);
+  document.querySelectorAll('.key-btn').forEach(b=>{if(b.textContent===l)b.disabled=true});
+  const inWord=wCurrent.word.includes(l);
+  renderBlanks();
+  if(!inWord){
+    wVidas--;renderVidas();
+    document.querySelectorAll('.letter-box').forEach(b=>{b.classList.add('wrong-flash')});
+    setTimeout(()=>document.querySelectorAll('.letter-box').forEach(b=>b.classList.remove('wrong-flash')),350);
+  } else {
+    const boxes=document.querySelectorAll('.letter-box');
+    wCurrent.word.split('').forEach((c,i)=>{if(c===l)boxes[i].classList.add('correct')});
+    setTimeout(()=>document.querySelectorAll('.letter-box').forEach(b=>b.classList.remove('correct')),600);
+  }
+  // ganó
+  if(wCurrent.word.split('').every(c=>wGuessed.has(c))){
+    wDone=true;
+    const bonus=8;addScore(bonus);spawnConfetti(10);
+    document.getElementById('wordMsg').textContent=`¡Exacto! +${bonus}⭐ 🎉`;
+    document.getElementById('wordMsg').style.color='#67e8f9';
+    document.getElementById('wordNext').style.display='block';
+    document.getElementById('wordSkip').style.display='none';
+    showToast(`💭 ¡Ximena sabía! "${wCurrent.word}" ✓ +${bonus}⭐`);
+  } else if(wVidas===0){
+    wDone=true;
+    document.getElementById('wordMsg').textContent=`Era "${wCurrent.word}" 😅 ¡La próxima!`;
+    document.getElementById('wordMsg').style.color='#fda4af';
+    document.getElementById('wordNext').style.display='block';
+    const boxes=document.querySelectorAll('.letter-box');
+    wCurrent.word.split('').forEach((c,i)=>{boxes[i].textContent=c;boxes[i].style.color='#fda4af'});
+    renderKeyboard();
+  }
+}
+document.getElementById('wordNext').addEventListener('click',()=>{wIdx++;buildWord()});
+document.getElementById('wordSkip').addEventListener('click',()=>{wIdx++;buildWord()});
+document.getElementById('wordSkip').addEventListener('click',()=>{wIdx++;buildWord()});
+buildWord();
+
+/* ══════════════════════════════════════════════════
+   JUEGO 3 — AFIRMACIONES
+══════════════════════════════════════════════════ */
+let affIdx=0,affAnswered=false;
+
+function buildAff(){
+  if(affIdx>=AFIRMACIONES.length){
+    // cicla de vuelta
+    affIdx=0;
+  }
+  affAnswered=false;
+  const data=AFIRMACIONES[affIdx];
+
+  // progress dots
+  const prog=document.getElementById('affProgress');
+  prog.innerHTML='';
+  AFIRMACIONES.forEach((_,i)=>{
+    const d=document.createElement('div');d.className='a-dot';
+    if(i<affIdx)d.classList.add('done');
+    if(i===affIdx)d.classList.add('active');
+    prog.appendChild(d);
+  });
+
+  document.getElementById('affQ').textContent=data.pregunta;
+  document.getElementById('affCard').classList.remove('show');
+  document.getElementById('affNext').classList.remove('show');
+  document.getElementById('affRestart').classList.remove('show');
+
+  const opts=document.getElementById('affOpts');
+  opts.innerHTML='';
+  data.opciones.forEach((op,i)=>{
+    const btn=document.createElement('button');btn.className='aff-opt';
+    btn.innerHTML=`<span style="font-size:1.1rem">${op.texto.split(' ')[0]}</span> ${op.texto.split(' ').slice(1).join(' ')}`;
+    btn.addEventListener('click',()=>selectAff(op,btn));
+    opts.appendChild(btn);
+  });
+}
+
+function selectAff(op,btn){
+  if(affAnswered)return;
+  affAnswered=true;
+  // marcar seleccionada
+  addScore(10);
+  document.querySelectorAll('.aff-opt').forEach(b=>{b.disabled=true;});
+  btn.classList.add('selected');
+  // mostrar carta
+  document.getElementById('affEmoji').textContent=op.emoji;
+  document.getElementById('affText').textContent=op.carta;
+  const card=document.getElementById('affCard');
+  card.classList.add('show');
+  // scroll suave a la carta
+  setTimeout(()=>card.scrollIntoView({behavior:'smooth',block:'nearest'}),100);
+  // fx
+  spawnSparks(innerWidth/2,innerHeight*0.6,14,185,230);
+  spawnConfetti(8);
+  // botones
+  const hasNext=affIdx<AFIRMACIONES.length-1;
+  const nextBtn=document.getElementById('affNext');
+  const restartBtn=document.getElementById('affRestart');
+  if(hasNext){
+    nextBtn.textContent='Siguiente 💫';
+    nextBtn.classList.add('show');
+    restartBtn.classList.remove('show');
+  } else {
+    nextBtn.classList.remove('show');
+    restartBtn.classList.add('show');
+  }
+}
+
+document.getElementById('affNext').addEventListener('click',()=>{
+  affIdx++;buildAff();
+  document.getElementById('affOpts').scrollIntoView({behavior:'smooth',block:'start'});
+});
+document.getElementById('affRestart').addEventListener('click',()=>{
+  affIdx=0;buildAff();
+  document.getElementById('affOpts').scrollIntoView({behavior:'smooth',block:'start'});
 });
 
-document.getElementById('inputPass').addEventListener('keydown',function(e){
-  if(e.key==='Enter') document.getElementById('btnEntrar').click();
-});
-document.getElementById('inputUsuario').addEventListener('keydown',function(e){
-  if(e.key==='Enter') document.getElementById('inputPass').focus();
-});
+buildAff();
 
-document.getElementById('btnRegalito').addEventListener('click',function(){
-  contadorScreen.style.transition='opacity 0.6s ease';
-  contadorScreen.style.opacity='0';
-  setTimeout(function(){
-    contadorScreen.style.display='none';
-    // Mostrar el regalito — activar fondo estrellas y apertura
-    document.getElementById('bg').style.display='block';
-    document.getElementById('apertura').style.display='flex';
-  },650);
-});
 
-/* ══ APERTURA ══ */
-(function(){
-  var FRASES=["Eres la pausa que necesita mi respiración", "Tu nombre es el único verso que sé de memoria", "Me perdí en tus ojos y no pedí que me rescataran", "Eres el amanecer que vale la pena trasnochar", "Contigo aprendí que el tiempo tiene un sabor distinto", "Abrí esto — adentro vive algo que hice pensando solo en ti"];
-  var el=document.getElementById('fraseUnica');
-  el.textContent='“'+FRASES[Math.floor(Math.random()*FRASES.length)]+'”';
+/* ══ PUNTOS NUEVOS ══ */
+// Sobrescribir addScore con la versión que incluye checkCartaSecreta
+var _addScoreOrig = addScore;
+addScore = function(n){
+  totalScore += n;
+  document.getElementById('totalScore').textContent = totalScore;
+  checkCartaSecreta();
+};
 
-  var lacre=document.getElementById('lacre');
-  var papel=document.getElementById('papel');
-  var apertura=document.getElementById('apertura');
-  var done=false;
+/* ══ CARTA SECRETA ══ */
+var cartaMostrada = false;
 
-  lacre.addEventListener('click',function(){
-    if(done)return; done=true;
-    lacre.style.transition='transform 0.45s ease,opacity 0.45s ease,filter 0.45s ease';
-    lacre.style.transform='scale(2.8)';
-    lacre.style.opacity='0';
-    lacre.style.filter='blur(10px)';
-    var rect=lacre.getBoundingClientRect();
-    var cx=rect.left+rect.width/2, cy=rect.top+rect.height/2;
-    for(var i=0;i<12;i++){
-      var sp=document.createElement('div');
-      var ang=(i/12)*Math.PI*2;
-      var dist=50+Math.random()*80;
-      var ex=cx+Math.cos(ang)*dist, ey=cy+Math.sin(ang)*dist;
-      var sz=4+Math.random()*5;
-      var col=i%2===0?'#dd2222':'#f5c842';
-      sp.style.cssText='position:fixed;border-radius:50%;pointer-events:none;z-index:1015;'+
-        'transition:all 0.5s ease;width:'+sz+'px;height:'+sz+'px;'+
-        'left:'+cx+'px;top:'+cy+'px;background:'+col+';transform:translate(-50%,-50%);';
-      document.body.appendChild(sp);
-      requestAnimationFrame(function(s,ex,ey){return function(){
-        s.style.left=ex+'px';s.style.top=ey+'px';s.style.opacity='0';
-      };}(sp,ex,ey));
-      setTimeout(function(s){return function(){s.remove()};}(sp),600);
+function checkCartaSecreta(){
+  if(!cartaMostrada && totalScore >= 50){
+    cartaMostrada = true;
+    var CONF=['⭐','💙','🌸','✨','💝','🎉'];
+    for(var i=0;i<20;i++){
+      (function(ii){
+        setTimeout(function(){
+          var c=document.createElement('div');
+          c.style.cssText='position:fixed;top:-30px;pointer-events:none;z-index:850;'+
+            'font-size:'+(0.9+Math.random()*0.8)+'rem;'+
+            'left:'+Math.random()*100+'%;'+
+            'animation:confFall '+(2+Math.random()*2)+'s linear forwards;'+
+            '--rot:'+(Math.random()*720-360)+'deg;';
+          c.textContent=CONF[Math.floor(Math.random()*CONF.length)];
+          document.body.appendChild(c);
+          setTimeout(function(){c.remove();},4000);
+        },ii*80);
+      })(i);
     }
     setTimeout(function(){
-      papel.style.transition='opacity 0.5s ease';
-      papel.style.opacity='0';
-    },350);
-    setTimeout(function(){
-      apertura.style.transition='opacity 0.5s ease';
-      apertura.style.opacity='0';
-      setTimeout(function(){
-        apertura.style.display='none';
-        mostrarDedicatoria();
-      },550);
-    },750);
-  });
-})();
-
-/* ══ DEDICATORIA ══ */
-function mostrarDedicatoria(){
-  var d=document.getElementById('dedicatoria');
-  d.classList.add('show');
-  requestAnimationFrame(function(){requestAnimationFrame(function(){d.classList.add('visible');});});
+      var cajita=document.getElementById('cajitaBtn');
+      if(cajita) cajita.classList.add('show');
+      showToast('🎁 ¡Llegaste a 50 puntos! Hay una sorpresa para vos 💙');
+    },600);
+  }
 }
-document.getElementById('dedSkip').addEventListener('click',function(){
-  var d=document.getElementById('dedicatoria');
-  d.style.transition='opacity 0.5s ease';
-  d.style.opacity='0';
-  setTimeout(function(){
-    d.style.display='none';
-    d.style.zIndex='-1';
-    var el=document.getElementById('pantEleccion');
-    el.style.display='flex';
-    el.style.zIndex='600';
-    requestAnimationFrame(function(){
-      requestAnimationFrame(function(){el.style.opacity='1';});
+
+/* ══ PUNTOS MEMORIA NUEVOS ══ */
+// Override buildMemory para usar nuevo sistema de puntos
+var _origFlipCard = flipCard;
+// Parchear el cálculo de bonus en memoria via monkeypatching del evento matched
+// Se hace sobrescribiendo la función que calcula el bonus
+// El bonus real se calcula en el handler de matched — lo hacemos via override de addScore arriba
+
+/* ══ LISTENERS CARTA ══ */
+document.addEventListener('DOMContentLoaded', function(){
+  var cajita = document.getElementById('cajitaBtn');
+  var csBack = document.getElementById('csBack');
+  var cs     = document.getElementById('cartaSecreta');
+  if(cajita){
+    cajita.addEventListener('click',function(){
+      if(!cs) return;
+      cs.classList.add('show');
+      cs.scrollTop=0;
+      requestAnimationFrame(function(){requestAnimationFrame(function(){cs.classList.add('visible');});});
     });
-  },550);
+  }
+  if(csBack){
+    csBack.addEventListener('click',function(){
+      if(!cs) return;
+      cs.style.transition='opacity 0.5s ease';
+      cs.style.opacity='0';
+      setTimeout(function(){cs.classList.remove('show','visible');cs.style.opacity='';},550);
+    });
+  }
 });
 
 
-/* ══ NAVEGACIÓN 
 
-/* ══ MOSTRAR MENÚ AL TERMINAR DEDICATORIA ══ */
-document.getElementById('dedSkip').addEventListener('click',function(){
-  var d=document.getElementById('dedicatoria');
-  d.style.transition='opacity 0.5s ease';
-  d.style.opacity='0';
-  setTimeout(function(){
-    d.style.display='none';
-    var el=document.getElementById('pantEleccion');
-    el.style.display='flex';
-    requestAnimationFrame(function(){
-      requestAnimationFrame(function(){el.style.opacity='1';});
-    });
-  },550);
-});
+/* ══ APERTURA Y DEDICATORIA (R2 script 2) ══ */
+
+
 
 /* ══ FONDO ESTRELLAS ══ */
 (function(){
