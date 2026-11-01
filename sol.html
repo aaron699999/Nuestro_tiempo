@@ -1505,6 +1505,17 @@ var FOTOS_DATA=[
 document.getElementById('btnVolverSol').style.display='block';
 if(window._iniciarCargaPax) window._iniciarCargaPax();
 
+
+
+/* ══ VOLVER (standalone) ══ */
+function volverDesdeSol(){
+  if(secPax>0){
+    irSecPax(secPax-1);
+  } else {
+    window.location.href='index.html#menu';
+  }
+}
+
 </script>
 </body>
 </html>

@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+<meta name="robots" content="noindex,nofollow">
+<title>Mientras Estás Lejos 💙</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Nunito:wght@400;600;700;800;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:100%;min-height:100%;overflow-x:hidden}
+body{
+  background:#0a0e1a;color:#fff;
+  font-family:'Nunito',sans-serif;
+  display:flex;flex-direction:column;align-items:center;
+  padding:50px 20px 60px;
+  position:relative;
+}
+canvas#bg{position:fixed;inset:0;z-index:0;pointer-events:none}
+
+.header{text-align:center;margin-bottom:8px;position:relative;z-index:2;max-width:380px;}
+.header-emoji{font-size:2rem;animation:floatY 3s ease-in-out infinite;}
+.header-titulo{
+  font-family:'Pacifico',cursive;
+  font-size:clamp(1.5rem,6vw,2.1rem);
+  background:linear-gradient(135deg,#a8c8ff,#7da8ff,#c8b8ff);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  margin:6px 0 8px;
+}
+.header-sub{
+  font-family:'Cormorant Garamond',serif;font-style:italic;
+  font-size:0.9rem;color:rgba(200,215,255,0.6);
+  line-height:1.6;margin-bottom:6px;
+}
+
+.timeline{
+  position:relative;z-index:2;
+  width:100%;max-width:380px;
+  margin-top:28px;
+  display:flex;flex-direction:column;gap:18px;
+}
+
+.carta-item{
+  position:relative;
+  border-radius:18px;
+  padding:18px 18px;
+  display:flex;align-items:center;gap:14px;
+  cursor:pointer;
+  transition:transform 0.2s;
+  background:rgba(255,255,255,0.04);
+  border:1px solid rgba(160,190,255,0.16);
+}
+.carta-item:active{transform:scale(0.97)}
+.carta-item.bloqueada{opacity:0.55;cursor:default;}
+.carta-item.bloqueada:active{transform:none;}
+.carta-item.especial{
+  background:rgba(255,210,100,0.07);
+  border:1.5px solid rgba(255,210,100,0.35);
+}
+
+.carta-icono{
+  font-size:1.7rem;min-width:36px;text-align:center;
+}
+.carta-info{flex:1;}
+.carta-fecha{
+  font-family:'Nunito',sans-serif;font-weight:800;
+  font-size:0.92rem;color:#fff;
+}
+.carta-item.especial .carta-fecha{color:#ffd864;}
+.carta-sub{
+  font-family:'Cormorant Garamond',serif;font-style:italic;
+  font-size:0.8rem;color:rgba(200,215,255,0.55);margin-top:2px;
+}
+.carta-estado{
+  font-family:'Nunito',sans-serif;font-weight:700;
+  font-size:0.62rem;letter-spacing:0.1em;text-transform:uppercase;
+  color:rgba(160,190,255,0.4);margin-top:4px;
+}
+.carta-item.especial .carta-estado{color:rgba(255,210,100,0.55);}
+
+/* ══ LECTOR DE CARTA ══ */
+#lectorOverlay{
+  position:fixed;inset:0;z-index:900;
+  background:rgba(5,8,16,0.92);
+  backdrop-filter:blur(6px);
+  display:none;align-items:center;justify-content:center;
+  padding:24px;opacity:0;transition:opacity 0.35s ease;
+}
+#lectorOverlay.visible{opacity:1;}
+.lector-card{
+  background:linear-gradient(165deg,#f5f0e4,#ebe2cc);
+  border-radius:14px;
+  padding:30px 24px;
+  max-width:340px;width:100%;max-height:78vh;overflow-y:auto;
+  text-align:center;
+  transform:scale(0.88);
+  transition:transform 0.35s cubic-bezier(0.34,1.56,0.64,1);
+  box-shadow:0 20px 60px rgba(0,0,0,0.5);
+}
+#lectorOverlay.visible .lector-card{transform:scale(1);}
+.lector-fecha{
+  font-family:'Nunito',sans-serif;font-weight:800;
+  font-size:0.72rem;letter-spacing:0.2em;text-transform:uppercase;
+  color:#8a6a3a;margin-bottom:4px;
+}
+.lector-sub{
+  font-family:'Cormorant Garamond',serif;font-style:italic;
+  font-size:0.85rem;color:#7a5a2a;margin-bottom:18px;
+}
+.lector-texto{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(1rem,3.5vw,1.12rem);
+  color:#2a1a0a;line-height:1.75;text-align:left;
+  white-space:pre-line;
+}
+.lector-cerrar{
+  margin-top:22px;padding:10px 28px;border-radius:999px;
+  background:rgba(20,30,60,0.08);border:1px solid rgba(20,30,60,0.25);
+  color:#2a1a0a;font-family:'Nunito',sans-serif;font-weight:700;
+  font-size:0.78rem;letter-spacing:0.12em;text-transform:uppercase;
+  cursor:pointer;
+}
+
+@keyframes floatY{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+
+/* ══ TEMA MADRID ══ */
+.carta-item.tema-madrid{
+  background:rgba(225,125,75,0.08);
+  border:1px solid rgba(240,155,95,0.32);
+}
+.carta-item.tema-madrid .carta-fecha{color:#ffb88a;}
+.carta-item.tema-madrid .carta-estado{color:rgba(255,185,135,0.6);}
+
+.lector-card.tema-madrid{
+  background:linear-gradient(165deg,#f8eddd,#efdcc0);
+  border:2px solid rgba(190,110,60,0.35);
+  position:relative;
+  padding-top:46px;
+}
+.lector-sello{
+  position:absolute;top:14px;right:14px;
+  border:1.5px dashed rgba(160,80,40,0.55);
+  border-radius:6px;padding:4px 8px;
+  font-family:'Nunito',sans-serif;font-weight:800;
+  font-size:0.5rem;letter-spacing:0.14em;text-transform:uppercase;
+  color:rgba(150,70,30,0.75);
+  transform:rotate(6deg);
+  text-align:center;line-height:1.4;
+}
+.lector-sello:empty{display:none;}
+.lector-deco-top{
+  display:flex;justify-content:center;gap:14px;
+  font-size:1.5rem;margin-bottom:10px;
+}
+.lector-deco-top:empty{display:none;}
+.lector-deco-bottom{
+  margin-top:18px;text-align:center;
+  font-size:1.1rem;letter-spacing:4px;opacity:0.85;
+}
+.lector-deco-bottom:empty{display:none;}
+
+#btnVolver{
+  position:fixed;top:16px;left:16px;z-index:50;
+  font-family:'Nunito',sans-serif;font-weight:700;font-size:0.78rem;
+  letter-spacing:0.12em;color:rgba(200,215,255,0.7);
+  text-decoration:none;
+}
+</style>
+</head>
+<body>
+<canvas id="bg"></canvas>
+<a id="btnVolver" href="index.html#menu">← Menú</a>
+
+<div class="header">
+  <div class="header-emoji">✈️</div>
+  <div class="header-titulo">Mientras Estás Lejos</div>
+  <div class="header-sub">Una carta para cada semana que estés fuera — se abren solas, en su fecha</div>
+</div>
+
+<div class="timeline" id="timeline"></div>
+
+<div id="lectorOverlay">
+  <div class="lector-card" id="lectorCard">
+    <div class="lector-sello" id="lectorSello"></div>
+    <div class="lector-deco-top" id="lectorDecoTop"></div>
+    <div class="lector-fecha" id="lectorFecha"></div>
+    <div class="lector-sub" id="lectorSub"></div>
+    <div class="lector-texto" id="lectorTexto"></div>
+    <div class="lector-deco-bottom" id="lectorDecoBottom"></div>
+    <button class="lector-cerrar" onclick="cerrarLector()">Cerrar</button>
+  </div>
+</div>
+
+<script>
+var CARTAS = [
+  {
+    "fecha_iso": "2026-10-28T00:00:00-04:00",
+    "fecha_label": "28 de Octubre",
+    "subtitulo": "Tu primera semana — Madrid",
+    "especial": false,
+    "texto": "Mi amada novia,\n\nNo logro imaginar la emoción de visitar un nuevo país y una nueva ciudad del primer mundo — un país que nos conquistó, que tiene tanta historia, y que la lleva plasmada en cada una de sus calles y costumbres. Divertite, alegrate, disfrutalo: salir del país, nada menos, como vos lo estás haciendo, es una experiencia inolvidable.\n\nCon la voluntad de Dios, tenés esta semana de vacaciones en Madrid junto a tu papá. Que sea inolvidable, que puedas aprovechar cada momento para conectar con él. Y no te olvides: las cosas que dejaste en Santa Cruz siguen ahí, esperándote. Madrid es la novedad de este momento — enfocate en lo principal: conocer, aprender, cuestionar, analizar y entender todo lo que ves a tu alrededor.\n\nConfío plenamente en que sos autosuficiente, y no tengo ninguna duda de que lo estás haciendo increíble. Seguramente hay muchas cosas que yo nunca voy a saber, porque no estoy ahí — y cuánto desearía estarlo. Pero estoy muy contento, emocionado, exaltado por esta oportunidad de crecimiento, porque las barreras que encerraban tu mente en Bolivia se acaban de romper. Ahora el mundo te está viendo a vos. Mantenete firme, segura — es un país desconocido, y lo que siempre prevalece es la seguridad en una misma y la firmeza en lo que una dice.\n\nHacé muchos paseos. Averiguá sobre tus maestrías. Conocé nueva gastronomía, nueva cultura, el origen de tantas cosas. Aprendé historia. Y sobre todo, conocete a vos misma en un lugar que no es tu zona de confort, animándote a ser vos misma sin nada que te lo impida.\n\nEstoy muy orgulloso de lo que estás logrando. Todo te lo ganaste vos sola — nada se te regaló.\n\nTe amo mucho, te extraño mucho, te adoro. Y aunque quedan seis semanas más de aventuras, seguramente Madrid va a ser una página rápida que te prepara para la verdadera aventura que es Bratislava. Acá voy a estar, escribiéndote cada miércoles, porque esta es mi forma de seguir conectado con vos.\n\nSiempre vas a ser mía y solamente mía — nunca lo olvides. Vida mía, amada mía, hermana mía, amiga mía: sos mi todito, linda, y mi prometida.\n\nMua 💋",
+    "tema": "madrid"
+  },
+  {
+    "fecha_iso": "2026-11-04T00:00:00-04:00",
+    "fecha_label": "4 de Noviembre",
+    "subtitulo": "Primera semana en Eslovaquia",
+    "especial": false,
+    "texto": "Esta carta todavía no está escrita — la estamos preparando con mucho cariño. Volvé a abrirla pronto 💙"
+  },
+  {
+    "fecha_iso": "2026-11-11T00:00:00-04:00",
+    "fecha_label": "11 de Noviembre",
+    "subtitulo": "Bratislava",
+    "especial": false,
+    "texto": "Esta carta todavía no está escrita — la estamos preparando con mucho cariño. Volvé a abrirla pronto 💙"
+  },
+  {
+    "fecha_iso": "2026-11-18T00:00:00-04:00",
+    "fecha_label": "18 de Noviembre",
+    "subtitulo": "Bratislava",
+    "especial": false,
+    "texto": "Esta carta todavía no está escrita — la estamos preparando con mucho cariño. Volvé a abrirla pronto 💙"
+  },
+  {
+    "fecha_iso": "2026-11-20T00:00:00-04:00",
+    "fecha_label": "20 de Noviembre",
+    "subtitulo": "¡5 meses de noviazgo! 💙",
+    "especial": true,
+    "texto": "Esta carta todavía no está escrita — la estamos preparando con mucho cariño. Volvé a abrirla pronto 💙"
+  },
+  {
+    "fecha_iso": "2026-11-25T00:00:00-04:00",
+    "fecha_label": "25 de Noviembre",
+    "subtitulo": "Bratislava",
+    "especial": false,
+    "texto": "Esta carta todavía no está escrita — la estamos preparando con mucho cariño. Volvé a abrirla pronto 💙"
+  },
+  {
+    "fecha_iso": "2026-12-02T00:00:00-04:00",
+    "fecha_label": "2 de Diciembre",
+    "subtitulo": "Bratislava",
+    "especial": false,
+    "texto": "Esta carta todavía no está escrita — la estamos preparando con mucho cariño. Volvé a abrirla pronto 💙"
+  },
+  {
+    "fecha_iso": "2026-12-09T00:00:00-04:00",
+    "fecha_label": "9 de Diciembre",
+    "subtitulo": "Tu última semana — casi en casa",
+    "especial": false,
+    "texto": "Esta carta todavía no está escrita — la estamos preparando con mucho cariño. Volvé a abrirla pronto 💙"
+  }
+];
+
+function pad(n){return String(n).padStart(2,'0');}
+
+var TEMAS = {
+  madrid: {
+    icono: '⛪',
+    top: ['⛪','🏛️','👗','✈️'],
+    bottom: '⛪ ✦ 🏛️ ✦ 👗 ✦ ✈️',
+    sello: 'MADRID<br>ESPAÑA 🇪🇸'
+  }
+};
+
+function renderTimeline(){
+  var cont = document.getElementById('timeline');
+  cont.innerHTML = '';
+  var ahora = Date.now();
+
+  CARTAS.forEach(function(c, idx){
+    var fechaMs = new Date(c.fecha_iso).getTime();
+    var desbloqueada = ahora >= fechaMs;
+    var tema = (c.tema && TEMAS[c.tema]) ? TEMAS[c.tema] : null;
+
+    var item = document.createElement('div');
+    item.className = 'carta-item'
+      + (desbloqueada ? '' : ' bloqueada')
+      + (c.especial ? ' especial' : '')
+      + ((tema && desbloqueada) ? ' tema-' + c.tema : '');
+
+    var icono = !desbloqueada ? '🔒' : (tema ? tema.icono : (c.especial ? '💌' : '✉️'));
+    var estado = desbloqueada ? 'Toca para leer' : 'Se abre el ' + c.fecha_label;
+
+    item.innerHTML =
+      '<div class="carta-icono">'+icono+'</div>'+
+      '<div class="carta-info">'+
+        '<div class="carta-fecha">'+c.fecha_label+'</div>'+
+        '<div class="carta-sub">'+c.subtitulo+'</div>'+
+        '<div class="carta-estado">'+estado+'</div>'+
+      '</div>';
+
+    if(desbloqueada){
+      item.addEventListener('click', function(){ abrirCarta(idx); });
+    }
+
+    cont.appendChild(item);
+  });
+}
+
+function abrirCarta(idx){
+  var c = CARTAS[idx];
+  var tema = (c.tema && TEMAS[c.tema]) ? TEMAS[c.tema] : null;
+  var card = document.getElementById('lectorCard');
+  card.className = 'lector-card' + (tema ? ' tema-' + c.tema : '');
+  document.getElementById('lectorFecha').textContent = c.fecha_label;
+  document.getElementById('lectorSub').textContent = c.subtitulo;
+  document.getElementById('lectorTexto').textContent = c.texto;
+  document.getElementById('lectorSello').innerHTML = tema ? tema.sello : '';
+  document.getElementById('lectorDecoTop').textContent = tema ? tema.top.join('  ') : '';
+  document.getElementById('lectorDecoBottom').textContent = tema ? tema.bottom : '';
+  card.scrollTop = 0;
+  var ov = document.getElementById('lectorOverlay');
+  ov.style.display = 'flex';
+  requestAnimationFrame(function(){
+    requestAnimationFrame(function(){ ov.classList.add('visible'); });
+  });
+}
+
+function cerrarLector(){
+  var ov = document.getElementById('lectorOverlay');
+  ov.classList.remove('visible');
+  setTimeout(function(){ ov.style.display = 'none'; }, 350);
+}
+
+renderTimeline();
+// Revisar cada minuto por si una carta se desbloquea mientras tiene la página abierta
+setInterval(renderTimeline, 60000);
+
+/* ══ FONDO ESTRELLAS/VUELO ══ */
+(function(){
+  var bg = document.getElementById('bg');
+  var bx = bg.getContext('2d');
+  function resz(){bg.width=innerWidth;bg.height=innerHeight;}
+  resz(); window.addEventListener('resize', resz);
+  var ST = [];
+  for(var i=0;i<140;i++){
+    ST.push({x:Math.random(),y:Math.random(),r:Math.random()*1.3+0.2,
+      a:Math.random()*0.55+0.2,sp:0.002+Math.random()*0.006,ph:Math.random()*Math.PI*2});
+  }
+  function draw(t){
+    bx.clearRect(0,0,bg.width,bg.height);
+    var g = bx.createRadialGradient(bg.width/2,bg.height*0.3,0,bg.width/2,bg.height/2,bg.width*0.9);
+    g.addColorStop(0,'#131c33');g.addColorStop(1,'#060912');
+    bx.fillStyle=g; bx.fillRect(0,0,bg.width,bg.height);
+    ST.forEach(function(s){
+      var a = s.a*(0.4+0.6*Math.sin(t*0.001*s.sp*400+s.ph));
+      bx.beginPath(); bx.arc(s.x*bg.width,s.y*bg.height,s.r,0,Math.PI*2);
+      bx.fillStyle='rgba(210,225,255,'+a+')'; bx.fill();
+    });
+    requestAnimationFrame(draw);
+  }
+  requestAnimationFrame(draw);
+})();
+</script>
+</body>
+</html>

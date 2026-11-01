@@ -979,6 +979,14 @@ canvas#bg{position:fixed;inset:0;z-index:0;pointer-events:none}
 .elec-d-jardin{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:0.82rem;color:rgba(255,180,210,0.65);margin-top:4px;}
 .elec-d-poemas{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:0.82rem;color:rgba(210,180,255,0.65);margin-top:4px;}
 
+
+/* ══ TARJETA VIAJE + FIX OVERFLOW MENÚ ══ */
+.elec-viaje{background:rgba(120,170,255,0.07);border:1.5px solid rgba(140,180,255,0.3);}
+.elec-n-viaje{font-family:'Nunito',sans-serif;font-weight:800;font-size:0.98rem;color:#a8c8ff;letter-spacing:0.08em;text-shadow:0 0 12px rgba(140,180,255,0.5);}
+.elec-d-viaje{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:0.82rem;color:rgba(190,210,255,0.65);margin-top:4px;}
+#pantEleccion{justify-content:flex-start;}
+#pantEleccion > :first-child{margin-top:auto;}
+#pantEleccion > :last-child{margin-bottom:auto;}
 </style>
 </head>
 <body>
@@ -1104,6 +1112,11 @@ canvas#bg{position:fixed;inset:0;z-index:0;pointer-events:none}
       <div class="elec-icon">💌</div>
       <div class="elec-n-poemas">Nuestros Poemas</div>
       <div class="elec-d-poemas">Cartas escritas para vos</div>
+    </a>
+    <a class="elec-card elec-viaje" href="cartas-viaje.html">
+      <div class="elec-icon">✈️</div>
+      <div class="elec-n-viaje">Mientras Estás Lejos</div>
+      <div class="elec-d-viaje">Una carta cada miércoles</div>
     </a>
   </div>
 </div>
@@ -1295,6 +1308,19 @@ document.getElementById('dedSkip').addEventListener('click',function(){
   }
   requestAnimationFrame(draw);
 })();
+
+
+/* ══ VOLVER DIRECTO AL MENÚ (desde otras páginas) ══ */
+if(location.hash === '#menu'){
+  document.getElementById('loginScreen').style.display='none';
+  document.getElementById('contadorScreen').style.display='none';
+  document.getElementById('apertura').style.display='none';
+  document.getElementById('dedicatoria').style.display='none';
+  var elMenu=document.getElementById('pantEleccion');
+  elMenu.style.display='flex';
+  elMenu.style.opacity='1';
+}
+
 </script>
 </body>
 </html>
