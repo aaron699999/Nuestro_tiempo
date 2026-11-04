@@ -166,6 +166,70 @@ canvas#bg{position:fixed;inset:0;z-index:0;pointer-events:none}
   letter-spacing:0.12em;color:rgba(200,215,255,0.7);
   text-decoration:none;
 }
+
+/* ══ TEMA BRATISLAVA ══ */
+.carta-item.tema-bratislava{
+  background:rgba(110,170,255,0.08);
+  border:1px solid rgba(140,190,255,0.34);
+}
+.carta-item.tema-bratislava .carta-fecha{color:#a9d4ff;}
+.carta-item.tema-bratislava .carta-estado{color:rgba(170,210,255,0.62);}
+.lector-card.tema-bratislava{
+  background:linear-gradient(165deg,#f0f5fb,#d9e5f2);
+  border:2px solid rgba(70,115,175,0.38);
+  position:relative;
+  padding-top:46px;
+}
+.lector-card.tema-bratislava .lector-fecha{color:#3a5f90;}
+.lector-card.tema-bratislava .lector-sub{color:#4a6d9c;}
+.lector-card.tema-bratislava .lector-sello{
+  border-color:rgba(45,90,155,0.55);
+  color:rgba(35,80,150,0.78);
+}
+.lector-card.tema-bratislava .lector-texto{color:#1b2538;}
+.lector-card.tema-bratislava .lector-cerrar{
+  background:rgba(40,80,140,0.08);border-color:rgba(40,80,140,0.3);color:#1b2538;
+}
+
+/* ══ TEMA VIAJE: ÁMSTERDAM · VIENA · BRATISLAVA ══ */
+.carta-item.tema-viaje{
+  background:linear-gradient(135deg,rgba(240,140,40,0.09),rgba(214,48,63,0.07),rgba(47,101,181,0.10));
+  border:1px solid rgba(190,170,255,0.36);
+}
+.carta-item.tema-viaje .carta-fecha{color:#ffd0a0;}
+.carta-item.tema-viaje .carta-estado{color:rgba(205,190,255,0.65);}
+.lector-card.tema-viaje{
+  background:linear-gradient(165deg,#fbf3e4,#f1eef5 52%,#dce7f4);
+  border:2px solid rgba(110,105,150,0.38);
+  position:relative;
+  padding-top:64px;
+  overflow-x:hidden;
+}
+.lector-card.tema-viaje::before{
+  content:"";position:absolute;top:0;left:0;right:0;height:7px;
+  background:linear-gradient(90deg,#f28c28 0 33.3%,#d6303f 33.3% 66.6%,#2f65b5 66.6% 100%);
+}
+.lector-card.tema-viaje .lector-fecha{color:#5a4f86;}
+.lector-card.tema-viaje .lector-sub{color:#6a5f98;}
+.lector-card.tema-viaje .lector-sello{
+  border-color:rgba(90,80,140,0.55);color:rgba(80,70,135,0.8);
+}
+.lector-card.tema-viaje .lector-texto{color:#1f1a2e;}
+.lector-card.tema-viaje .lector-cerrar{
+  background:rgba(70,60,120,0.08);border-color:rgba(70,60,120,0.3);color:#1f1a2e;
+}
+.lector-ruta{
+  display:flex;justify-content:center;align-items:center;flex-wrap:wrap;gap:5px;
+  margin:2px 0 14px;
+  font-family:'Nunito',sans-serif;font-weight:800;
+  font-size:0.56rem;letter-spacing:0.1em;text-transform:uppercase;
+}
+.lector-ruta:empty{display:none;}
+.ruta-paso{padding:3px 8px;border-radius:999px;border:1px solid;}
+.ruta-nl{color:#b35a10;background:rgba(240,140,40,0.13);border-color:rgba(220,120,30,0.45);}
+.ruta-at{color:#a62a35;background:rgba(214,48,63,0.10);border-color:rgba(190,40,55,0.45);}
+.ruta-sk{color:#2a5596;background:rgba(47,101,181,0.11);border-color:rgba(45,90,155,0.45);}
+.ruta-flecha{color:rgba(90,80,140,0.6);font-size:0.75rem;}
 </style>
 </head>
 <body>
@@ -184,6 +248,7 @@ canvas#bg{position:fixed;inset:0;z-index:0;pointer-events:none}
   <div class="lector-card" id="lectorCard">
     <div class="lector-sello" id="lectorSello"></div>
     <div class="lector-deco-top" id="lectorDecoTop"></div>
+    <div class="lector-ruta" id="lectorRuta"></div>
     <div class="lector-fecha" id="lectorFecha"></div>
     <div class="lector-sub" id="lectorSub"></div>
     <div class="lector-texto" id="lectorTexto"></div>
@@ -205,23 +270,26 @@ var CARTAS = [
   {
     "fecha_iso": "2026-11-04T00:00:00-04:00",
     "fecha_label": "4 de Noviembre",
-    "subtitulo": "Primera semana en Eslovaquia",
+    "subtitulo": "Primera semana en Bratislava",
     "especial": false,
-    "texto": "Esta carta todavía no está escrita — la estamos preparando con mucho cariño. Volvé a abrirla pronto 💙"
+    "texto": "Mi amorcito:\n\nDe pasar a ser española a creerte eslovaca… cuánto te amo, mi bebé multinacional.\n\nEl camino de un país a otro nunca es sencillo, y más aún hacerlo sola. Lo que mi novia estaba por hacer, ya lo hizo: ¡lo logró! Es digno de mucha admiración, y yo te admiro por tu determinación, por tu resiliencia, porque a pesar del miedo, de sentirte triste, frustrada, confundida, estresada, aun así continuás y seguís hacia adelante. No te quitás del paso: ponés los dos pies sobre ese camino para poder afrontarlo. Sos una mujer maravillosa, una niña tierna y muy dulce. Otra como mi amada novia no existe ni existirá en este planeta Tierra.\n\nCargar sola con la esperanza de tus sueños, sin nadie cerca, cuando nunca antes habías estado lejos de tu familia, tus amigos o tu hogar, significa que sos muy, pero muy fuerte, mi dulce bomboncito. Mi novia hace sentir envidia a las demás, no solo por su belleza, que es muchísima, sino por lo valiente y fuerte de su corazón.\n\nTe amo mucho, mi todito, linda. Desde que pusiste un pie en Madrid empezó tu trayecto: pisaste tres lugares distintos para llegar a tu destino — Madrid, Ámsterdam y Viena — y fuiste solucionando sobre la marcha todo lo que te faltaba. Lo hiciste sola, nadie te ayudó; mi novia, en realidad, no necesita de nadie. Doy gracias a Dios por poder ver de cerca lo que es una verdadera mujer, una mujer de la que se puede aprender.\n\nEstoy muy, pero muy orgulloso de todo lo que veré y de lo que ya vi. No tiene comparación. Sé que podés mucho más, aunque mi mente no logra comprenderlo, porque rompiste todo límite humano con tu ser. Mi solcito perfecta, adonde vayas vas a iluminar con tu alma, pero recordá que el único girasol en tu vida soy yo, vida mía.\n\nAhora tu camino terminó y empezó el capítulo de tu sueño: finalmente estás en Bratislava, Eslovaquia, en el intercambio que siempre soñaste, en el lugar que Dios designó para vos. Te amo tanto, mi princesita hermosa. Sé que vas a estar muy bien, sé que estás bien. No tengas miedo a lo desconocido, no tengas miedo a no saber algo: todos aprendemos así. Pero mi novia es privilegiada en inteligencia; seguro que lo que a cualquier persona le tomaría adaptarse, mi novia lo hará en una noche, no hay duda alguna.\n\nY aquí, en tus sueños, voy a estar yo, presente en cada momento, porque no me quiero perder esta increíble historia que tiene mi hermosa Ximena Morales Ugarte. A darle con todo, mi amorcito. Vos sos mucho para este mundo, no importa adónde vayas. Soy tu fan número 1.\n\nY de algo no me olvido: ni el frío de Bratislava va a parar que mi novia sea coqueta y salga desabrigada con tal de verse bien 😄\n\nTe adoro.\nAtte: tu novio 💙",
+    "tema": "viaje"
   },
   {
     "fecha_iso": "2026-11-11T00:00:00-04:00",
     "fecha_label": "11 de Noviembre",
     "subtitulo": "Bratislava",
     "especial": false,
-    "texto": "Esta carta todavía no está escrita — la estamos preparando con mucho cariño. Volvé a abrirla pronto 💙"
+    "texto": "Esta carta todavía no está escrita — la estamos preparando con mucho cariño. Volvé a abrirla pronto 💙",
+    "tema": "bratislava"
   },
   {
     "fecha_iso": "2026-11-18T00:00:00-04:00",
     "fecha_label": "18 de Noviembre",
     "subtitulo": "Bratislava",
     "especial": false,
-    "texto": "Esta carta todavía no está escrita — la estamos preparando con mucho cariño. Volvé a abrirla pronto 💙"
+    "texto": "Esta carta todavía no está escrita — la estamos preparando con mucho cariño. Volvé a abrirla pronto 💙",
+    "tema": "bratislava"
   },
   {
     "fecha_iso": "2026-11-20T00:00:00-04:00",
@@ -235,14 +303,16 @@ var CARTAS = [
     "fecha_label": "25 de Noviembre",
     "subtitulo": "Bratislava",
     "especial": false,
-    "texto": "Esta carta todavía no está escrita — la estamos preparando con mucho cariño. Volvé a abrirla pronto 💙"
+    "texto": "Esta carta todavía no está escrita — la estamos preparando con mucho cariño. Volvé a abrirla pronto 💙",
+    "tema": "bratislava"
   },
   {
     "fecha_iso": "2026-12-02T00:00:00-04:00",
     "fecha_label": "2 de Diciembre",
     "subtitulo": "Bratislava",
     "especial": false,
-    "texto": "Esta carta todavía no está escrita — la estamos preparando con mucho cariño. Volvé a abrirla pronto 💙"
+    "texto": "Esta carta todavía no está escrita — la estamos preparando con mucho cariño. Volvé a abrirla pronto 💙",
+    "tema": "bratislava"
   },
   {
     "fecha_iso": "2026-12-09T00:00:00-04:00",
@@ -261,6 +331,19 @@ var TEMAS = {
     top: ['⛪','🏛️','👗','✈️'],
     bottom: '⛪ ✦ 🏛️ ✦ 👗 ✦ ✈️',
     sello: 'MADRID<br>ESPAÑA 🇪🇸'
+  },
+  viaje: {
+    icono: '🛫',
+    top: ['🌷','🚲','🎻','🏰'],
+    bottom: '🌷 ✦ 🎻 ✦ 🏰 ✦ ❄️',
+    sello: 'ÁMSTERDAM 🇳🇱<br>VIENA 🇦🇹<br>BRATISLAVA 🇸🇰',
+    ruta: '<span class="ruta-paso ruta-nl">Ámsterdam</span><span class="ruta-flecha">✈</span><span class="ruta-paso ruta-at">Viena</span><span class="ruta-flecha">✈</span><span class="ruta-paso ruta-sk">Bratislava</span>'
+  },
+  bratislava: {
+    icono: '🏰',
+    top: ['🏰','🛸','⛪','❄️'],
+    bottom: '🏰 ✦ 🛸 ✦ ⛪ ✦ ❄️',
+    sello: 'BRATISLAVA<br>ESLOVAQUIA 🇸🇰'
   }
 };
 
@@ -308,6 +391,7 @@ function abrirCarta(idx){
   document.getElementById('lectorSub').textContent = c.subtitulo;
   document.getElementById('lectorTexto').textContent = c.texto;
   document.getElementById('lectorSello').innerHTML = tema ? tema.sello : '';
+  document.getElementById('lectorRuta').innerHTML = (tema && tema.ruta) ? tema.ruta : '';
   document.getElementById('lectorDecoTop').textContent = tema ? tema.top.join('  ') : '';
   document.getElementById('lectorDecoBottom').textContent = tema ? tema.bottom : '';
   card.scrollTop = 0;
