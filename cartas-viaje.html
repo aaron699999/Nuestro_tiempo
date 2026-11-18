@@ -230,6 +230,35 @@ canvas#bg{position:fixed;inset:0;z-index:0;pointer-events:none}
 .ruta-at{color:#a62a35;background:rgba(214,48,63,0.10);border-color:rgba(190,40,55,0.45);}
 .ruta-sk{color:#2a5596;background:rgba(47,101,181,0.11);border-color:rgba(45,90,155,0.45);}
 .ruta-flecha{color:rgba(90,80,140,0.6);font-size:0.75rem;}
+
+/* ══ TEMA ARQUITECTA (papel tipo plano) ══ */
+.carta-item.tema-arquitecta{
+  background:rgba(110,160,255,0.08);
+  border:1px solid rgba(150,190,255,0.36);
+}
+.carta-item.tema-arquitecta .carta-fecha{color:#a9cbff;}
+.carta-item.tema-arquitecta .carta-estado{color:rgba(170,205,255,0.62);}
+.lector-card.tema-arquitecta{
+  background-color:#eef3f9;
+  background-image:
+    linear-gradient(rgba(55,95,155,0.08) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(55,95,155,0.08) 1px,transparent 1px);
+  background-size:22px 22px;
+  border:2px solid rgba(55,95,155,0.42);
+  position:relative;
+  padding-top:46px;
+}
+.lector-card.tema-arquitecta .lector-fecha{color:#34588b;}
+.lector-card.tema-arquitecta .lector-sub{color:#4a6a98;}
+.lector-card.tema-arquitecta .lector-sello{border-color:rgba(45,85,150,0.55);color:rgba(35,75,145,0.78);}
+.lector-card.tema-arquitecta .lector-texto{color:#1a2740;}
+.lector-card.tema-arquitecta .lector-cerrar{background:rgba(40,80,140,0.08);border-color:rgba(40,80,140,0.3);color:#1a2740;}
+.lector-p{margin:0;}
+.lector-sep{
+  display:flex;align-items:center;justify-content:center;gap:10px;
+  margin:16px 0;color:rgba(52,88,139,0.6);font-size:0.8rem;
+}
+.lector-sep::before,.lector-sep::after{content:'';flex:1;height:1px;background:rgba(52,88,139,0.28);}
 </style>
 </head>
 <body>
@@ -288,8 +317,8 @@ var CARTAS = [
     "fecha_label": "18 de Noviembre",
     "subtitulo": "Bratislava",
     "especial": false,
-    "texto": "Esta carta todavía no está escrita — la estamos preparando con mucho cariño. Volvé a abrirla pronto 💙",
-    "tema": "bratislava"
+    "texto": "Mi todito, linda:\n\nUna semana en España y ya casi tres en Eslovaquia; un mes lejos de mí. Qué difícil ha sido no tenerte cerca, al menos en estos momentos difíciles que hemos pasado. Pero Dios ha sido más grande que todo eso: más grande que la distancia, más grande que nuestras \"heridas\", más grande que nuestras peleas, más grande que la diferencia horaria, porque ha podido conectar nuestros corazones.\n\nEsta carta es mi prueba de que nunca más te voy a soltar. No importa lo que pase: si me mirás feo, me gritás, me lastimás, me hacés berrinche o me hacés celos muy intensos, nunca, pero nunca, voy a dejar a mi bebé solita con todos esos sentimientos, porque tu corazoncito es puro y tierra santa. Ahora sé la urgencia que tenés de mí y cuál es mi posición, lo que puedo hacer como hombre: para encontrarte solo debo amarte inmensamente y en plenitud. Suena sencillo, ¿no? Jajaja, pero no lo es. Aunque los sentimientos me aten de manos y pies, iré tras Dios para que me enseñe cómo amarte y buscarte con todo mi amor, y si mi amor no llegara a alcanzar, le rogaré para que rompa mi límite y te busque con un nuevo corazón, porque yo no quiero rendirme nunca ante tu corazón y quiero mantenerme fiel, amándote hasta que se apague.\n\nMi bomboncito, estoy demasiado orgulloso, demasiado. Me parece increíble todo: aunque con mucho miedo y tropezones, aprendiste a moverte en un país y una ciudad diferentes, con un idioma distinto. Aprendiste a comprarte sola tus víveres en un centro comercial nuevo, con productos diferentes; a apreciar qué es útil y qué no para tu alimentación, y a preocuparte cuando te falta qué comer. Aprendiste a lavar tu ropa, a preocuparte por qué ponerte y por tener con qué abrigarte. Mi bebé, estoy orgulloso: aunque no haya habido un lugar cómodo donde secarla, eso no te detuvo. Aprendiste a preocuparte por las cosas del hogar, a lavar tus servicios después de cocinar, a hacerte tu comida y a ser independiente en ello; a notar lo que antes no notabas, a saber los precios y a ser más consciente de lo que es vivir de verdad sola. Lo has hecho todo excelente.\n\nEstás abriendo cada vez más tu mente y me muero de ganas por ver qué más aprendés. Tu inteligencia no solo deslumbraba en Santa Cruz, Bolivia, sino también en Bratislava, Eslovaquia. Sé que ese país te va a quedar chico, porque mi bebé tiene una inteligencia muy grande que va acompañada de Dios, y cada vez va a romper más sus límites.\n\nMi arquitecta favorita, mi mujerzota independiente: aprendiste a hacerlo todo sola, a transportarte sola en ese país, no en micros como en Santa Cruz, sino en metros y trenes, en esos buses extravagantes, y a saber leer y escuchar dónde tenés que parar. Te atreviste a salir de noche, a conocer lo bello de ese lugar y a disfrutar de la compañía de Dios, que te ha llevado hasta allá para que aprendas más de su creación.\n\nMe enorgullecés mucho. Que sepas que de lo que estás hecha y todas tus capacidades, que siempre las tuviste, ya salieron a la luz. Siempre fuiste capaz de todo y no hay nada que se le pueda negar a ese corazón, a esa mente y a ese espíritu.\n\nAcá, atentamente, tu novio, que sigue esperando ver qué hazañas más lográs.",
+    "tema": "arquitecta"
   },
   {
     "fecha_iso": "2026-11-20T00:00:00-04:00",
@@ -344,6 +373,13 @@ var TEMAS = {
     top: ['🏰','🛸','⛪','❄️'],
     bottom: '🏰 ✦ 🛸 ✦ ⛪ ✦ ❄️',
     sello: 'BRATISLAVA<br>ESLOVAQUIA 🇸🇰'
+  },
+  arquitecta: {
+    icono: '📐',
+    top: ['🕊️','📐','🚆','🌟'],
+    bottom: '🕊️ ✦ 📐 ✦ 🚆 ✦ 🌟',
+    sello: 'BRATISLAVA<br>UN MES 🇸🇰',
+    sep: '✦'
   }
 };
 
@@ -389,7 +425,24 @@ function abrirCarta(idx){
   card.className = 'lector-card' + (tema ? ' tema-' + c.tema : '');
   document.getElementById('lectorFecha').textContent = c.fecha_label;
   document.getElementById('lectorSub').textContent = c.subtitulo;
-  document.getElementById('lectorTexto').textContent = c.texto;
+  var cuerpo = document.getElementById('lectorTexto');
+  cuerpo.innerHTML = '';
+  if(tema && tema.sep){
+    c.texto.split('\n\n').forEach(function(par, i){
+      if(i > 0){
+        var sp = document.createElement('div');
+        sp.className = 'lector-sep';
+        sp.textContent = tema.sep;
+        cuerpo.appendChild(sp);
+      }
+      var pp = document.createElement('p');
+      pp.className = 'lector-p';
+      pp.textContent = par;
+      cuerpo.appendChild(pp);
+    });
+  } else {
+    cuerpo.textContent = c.texto;
+  }
   document.getElementById('lectorSello').innerHTML = tema ? tema.sello : '';
   document.getElementById('lectorRuta').innerHTML = (tema && tema.ruta) ? tema.ruta : '';
   document.getElementById('lectorDecoTop').textContent = tema ? tema.top.join('  ') : '';
