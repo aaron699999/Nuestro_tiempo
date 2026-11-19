@@ -259,6 +259,30 @@ canvas#bg{position:fixed;inset:0;z-index:0;pointer-events:none}
   margin:16px 0;color:rgba(52,88,139,0.6);font-size:0.8rem;
 }
 .lector-sep::before,.lector-sep::after{content:'';flex:1;height:1px;background:rgba(52,88,139,0.28);}
+
+/* ══ TEMA 5 MESES ══ */
+@keyframes latido{0%,100%{transform:scale(1)}50%{transform:scale(1.09)}}
+@keyframes brilloOro{0%,100%{box-shadow:0 0 0 rgba(255,210,100,0)}50%{box-shadow:0 0 24px rgba(255,210,100,0.3)}}
+.carta-item.tema-cincomeses{
+  background:rgba(255,200,100,0.1);
+  border:1.5px solid rgba(255,210,100,0.5);
+  animation:brilloOro 2.6s ease-in-out infinite;
+}
+.carta-item.tema-cincomeses .carta-fecha{color:#ffd864;}
+.lector-card.tema-cincomeses{
+  background:radial-gradient(circle at 50% 0%,#fff8e6 0%,#fbeccd 55%,#f3dcb0 100%);
+  border:2px solid rgba(214,170,70,0.65);
+  box-shadow:0 20px 60px rgba(0,0,0,0.5),0 0 40px rgba(255,205,100,0.28);
+  position:relative;
+  padding-top:46px;
+}
+.lector-card.tema-cincomeses .lector-fecha{color:#a97c1e;}
+.lector-card.tema-cincomeses .lector-sub{color:#9a6e1a;}
+.lector-card.tema-cincomeses .lector-texto{color:#3a2410;}
+.lector-card.tema-cincomeses .lector-sello{border-color:rgba(190,140,40,0.7);color:rgba(165,115,20,0.88);}
+.lector-card.tema-cincomeses .lector-deco-top{animation:latido 1.8s ease-in-out infinite;}
+.lector-card.tema-cincomeses .lector-sep::before,.lector-card.tema-cincomeses .lector-sep::after{background:rgba(190,140,40,0.38);}
+.lector-card.tema-cincomeses .lector-cerrar{background:rgba(190,140,40,0.12);border-color:rgba(190,140,40,0.4);color:#3a2410;}
 </style>
 </head>
 <body>
@@ -325,7 +349,8 @@ var CARTAS = [
     "fecha_label": "20 de Noviembre",
     "subtitulo": "¡5 meses de noviazgo! 💙",
     "especial": true,
-    "texto": "Esta carta todavía no está escrita — la estamos preparando con mucho cariño. Volvé a abrirla pronto 💙"
+    "texto": "Mi amor, no puedo creer que ya cumplimos cinco meses de novios. Este mes en particular ha sido diferente: un mes de conocernos en nuestra otra faceta y de poder salir de ella. Un mes diferente porque estamos lejos, mi novia en Bratislava y yo en Santa Cruz. Un mes diferente porque, a diferencia de otros meses, hoy no podemos salir a cenar físicamente, pero sí podemos compartir una comida virtualmente, ya que ahora somos novios virtuales. Mi novia virtual, te amo tanto. No había llegado a pensar que podía sentir tanto amor a través de una cámara; hace unos meses o años habría sido impensable para mí. Pero el amor lo puede todo: que me dé tanta alegría verte a través de una cámara o una videollamada, y poder besarte y sentirte cerca, es sin duda alguna el amor que no tiene barreras.\n\nEstoy profundamente agradecido por todo el trabajo que has hecho en mí, por el tiempo que has dedicado a rezar por nuestra relación, por el tiempo de introspección de cada uno. Ambos nos esforzamos en conocernos, pero vos te esforzaste mucho más en conocerme, en amarme, en romper tus límites, y eso para mí no tiene punto de comparación. Muchas gracias, mi amorcito. A pesar de todos los problemas, has podido sobrellevar tu intercambio. Perdón si no he sido compañero, o si me alejé: has podido hacer todo sola, vivir sola. Ya sabés todo lo que pienso sobre tu intercambio: todo lo que estás logrando, y lo que podés lograr, mi amorcito, no tiene techo.\n\nEstoy tan feliz de tenerte a mi lado. El regalo más grande de mi vida es mi novia. Nunca habría imaginado poder conocerte y hacerte mi novia.\n\nSos tan maravillosa, especial, única, inigualable: nunca existirá otra Ximena Morales Ugarte. Con ese corazón que siente tanto, a profundidad; con ese corazón que ama tanto, a profundidad; con ese corazón tan fuerte y valiente, a profundidad. Con esa mente que siempre está pensando en qué mejorar; con esa mente que siempre piensa en el bienestar de sus amigos, de su familia y ahora también de su novio. Con ese espíritu tan único que tiene mi novia, tan cercano a Dios. Me queda decir que estoy muy, muy enamorado de tu corazón, de tu mente y de tu espíritu. Y así, de tan enamorado que estoy, quiero estarlo para toda la vida.\n\nY ahora mi más grande declaración de amor es que sos mi vida, mi todito, muy linda. Todo lo que significás para mí tiene un gran valor, una gran profundidad y un gran significado en mi corazón. Está sellado por tus besos, por tus abrazos, por tus palabras, por tu inmenso amor. En él hay una mansión. Diría una casa, pero la casa es simple y sencilla, y la mansión es lo más grande en comparación. Y vos tenés algo así de grande en mi corazón, algo que es solamente para vos: cubrís casi todo mi corazón, porque hay cosas que las cubre Dios, pero si las quitamos, vos cubrís todo mi corazón con tu amor.\n\nMe alegrás las mañanas con tu sonrisa; me das tanto amor apenas despierto, tantas emociones: alegría, celos, hasta rabia. Me acompañás todo el día con tus ocurrencias, con tus chismes, con tus celos posesivos de oro. Hacés mis días mucho más divertidos y llevaderos, les das color, y me das muchos ánimos para seguir adelante. ¿Cómo no ponerme contento por tener una novia así?\n\nTe amo mucho, mucho, mucho, infinitamente, mi solcito. ¡Por muchos meses más juntos! Porque te adoro y me encantás. Te prometo estar aquí siempre, con el corazón dispuesto a amarte mucho, mucho más de lo que cualquier ser humano pueda amar.\nMua, muchos besitos te mando, mi amorcito 💙",
+    "tema": "cincomeses"
   },
   {
     "fecha_iso": "2026-11-25T00:00:00-04:00",
@@ -380,8 +405,18 @@ var TEMAS = {
     bottom: '🕊️ ✦ 📐 ✦ 🚆 ✦ 🌟',
     sello: 'BRATISLAVA<br>UN MES 🇸🇰',
     sep: '✦'
+  },
+  cincomeses: {
+    icono: '💝',
+    top: ['💙','💙','💙','💙','💙'],
+    bottom: '💙 ✦ 5 MESES ✦ 💙',
+    sello: 'CINCO MESES<br>20 · NOV 💙',
+    sep: '💙',
+    confeti: ['💙','✨','💕','🌟','💎']
   }
 };
+
+var VISTA_PREVIA = (typeof location !== 'undefined') && /[?&]previa=1/.test(location.search);
 
 function renderTimeline(){
   var cont = document.getElementById('timeline');
@@ -390,7 +425,7 @@ function renderTimeline(){
 
   CARTAS.forEach(function(c, idx){
     var fechaMs = new Date(c.fecha_iso).getTime();
-    var desbloqueada = ahora >= fechaMs;
+    var desbloqueada = VISTA_PREVIA || ahora >= fechaMs;
     var tema = (c.tema && TEMAS[c.tema]) ? TEMAS[c.tema] : null;
 
     var item = document.createElement('div');
@@ -448,11 +483,31 @@ function abrirCarta(idx){
   document.getElementById('lectorDecoTop').textContent = tema ? tema.top.join('  ') : '';
   document.getElementById('lectorDecoBottom').textContent = tema ? tema.bottom : '';
   card.scrollTop = 0;
+  if(tema && tema.confeti) lanzarConfeti(tema.confeti, 28);
   var ov = document.getElementById('lectorOverlay');
   ov.style.display = 'flex';
   requestAnimationFrame(function(){
     requestAnimationFrame(function(){ ov.classList.add('visible'); });
   });
+}
+
+function lanzarConfeti(lista, n){
+  for(var i=0;i<n;i++){
+    (function(k){
+      setTimeout(function(){
+        var c = document.createElement('div');
+        c.textContent = lista[Math.floor(Math.random()*lista.length)];
+        c.style.cssText = 'position:fixed;top:-30px;left:'+(Math.random()*100)+'%;font-size:'+(1+Math.random()*0.9)+'rem;pointer-events:none;z-index:1000;transition:top 3s linear,transform 3s linear,opacity 3s linear;';
+        document.body.appendChild(c);
+        requestAnimationFrame(function(){ requestAnimationFrame(function(){
+          c.style.top = '105vh';
+          c.style.transform = 'rotate('+(Math.random()*720-360)+'deg)';
+          c.style.opacity = '0.2';
+        }); });
+        setTimeout(function(){ if(c.parentNode) c.parentNode.removeChild(c); }, 3200);
+      }, k*90);
+    })(i);
+  }
 }
 
 function cerrarLector(){
